@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="HW_POS_Server.Views.ClientViews.MemberControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HW_POS_Server.Views.ClientViews"
+             xmlns:vm="clr-namespace:HW_POS_Server.ViewModels.ClientViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:MemberViewModel/>
+    </UserControl.DataContext>
+    <Grid Background="#ADADAD">
+        <TextBlock Text="Member Setting Information" TextAlignment="Center" VerticalAlignment= "Top" Foreground="Black" FontSize="28" Margin="10,24,405,0" Height="44" />
+        <DataGrid x:Name="dataGrid" RowHeaderWidth="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" CellStyle="{StaticResource DataGridCellStyle}" CanUserResizeColumns="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="366" Width="372" Margin="418,54,0,0" SelectedValue="{Binding MemberSelectValue, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding MemberData}" IsEnabled="{Binding DataGridEnable}">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding ID}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="姓名" Width="115"/>
+                <DataGridTextColumn Binding="{Binding Gender}" Header="性別" Width="50"/>
+                <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="手機" Width="140"/>
+                <DataGridTextColumn Binding="{Binding MemberRank}" Header="會員等級" Width="63"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Text="姓名: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Margin="46,89,701,0" Height="26" />
+        <TextBox Text="{Binding TextBoxName}"  Grid.Row="0" TextAlignment="Left" VerticalAlignment="Top" FontSize="20" IsReadOnly="{Binding MemberTextBoxEnable}" Margin="104,88,394,0"/>
+        <TextBlock Text="性別: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Margin="46,132,701,0" Height="26" />
+        <ComboBox DisplayMemberPath="Gender" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127"  FontSize="20" ItemsSource="{Binding GenderData}" SelectedItem="{Binding GenderSelectValue}" IsEnabled="{Binding MemberComboBoxEnable}" Margin="104,130,0,0"/>
+        <TextBlock Text="等級: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Margin="263,132,484,0" Height="26" />
+        <TextBox Text="{Binding TextBoxMemberRank}"  Grid.Row="0" TextAlignment="Left" VerticalAlignment="Top" FontSize="20" IsReadOnly="True" Margin="321,129,394,0" Height="32"/>
+        <TextBlock Text="電話號碼: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Margin="9,175,701,0" Height="26" />
+        <TextBox Text="{Binding TextBoxPhoneNumber}"  Grid.Row="0" TextAlignment="Left" VerticalAlignment="Top" FontSize="20" IsReadOnly="{Binding MemberTextBoxEnable}" Margin="104,175,394,0"/>
+        <TextBlock Text="住址: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Margin="9,218,701,0" Height="26" />
+        <TextBox Text="{Binding TextBoxAddress}" TextAlignment="Left" VerticalAlignment="Top" FontSize="16" IsReadOnly="{Binding MemberTextBoxEnable}" Margin="104,218,394,0" Height="27"/>
+        <TextBlock Text="備註: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Margin="9,261,701,0" Height="26" />
+        <TextBox Text="{Binding TextBoxPS}"  Grid.Row="0" TextAlignment="Left" VerticalAlignment="Top" FontSize="20" IsReadOnly="{Binding MemberTextBoxEnable}" Margin="104,261,394,0"/>
+        <Grid Margin="10,310,394,94" Visibility="{Binding ConsTotalVis}">
+            <TextBlock Text="消費金額: " TextAlignment="Right" VerticalAlignment= "Top" Foreground="Black" FontSize="20" Height="23" Margin="0,-5,307,0"/>
+            <TextBox Text="{Binding TextBoxContTotal}" TextAlignment="Left" VerticalAlignment="Top" FontSize="20" Margin="94,-7,0,0" HorizontalAlignment="Left" Width="302"/>
+        </Grid>
+        <Button Command="{Binding MemberAddBtn}" Content="新增" HorizontalAlignment="Left" Height="29" Foreground="Black" FontSize="20" VerticalAlignment="Top" Width="79" IsEnabled="{Binding MemberAddSetBtnEnable}" Margin="54,341,0,0"/>
+        <Button Command="{Binding MemberEditBtn}" Content="修改" HorizontalAlignment="Left" Height="29" Foreground="Black" FontSize="20" VerticalAlignment="Top" Width="79" IsEnabled="{Binding MemberEditSetBtnEnable}" Margin="174,341,0,0"/>
+        <Button Command="{Binding MemberDelBtn}" Content="刪除" HorizontalAlignment="Left" Height="29" Foreground="Black" FontSize="20" VerticalAlignment="Top" Width="79" IsEnabled="{Binding MemberDelSetBtnEnable}" Margin="294,341,0,0"/>
+        <Button Command="{Binding MemberSaveBtn}" Content="儲存" HorizontalAlignment="Left" Height="29" Foreground="Black" FontSize="20" VerticalAlignment="Top" Width="80" IsEnabled="{Binding SandCBtnEnable}" Margin="116,391,0,0"/>
+        <Button Command="{Binding MemberCancelBtn}" Content="Cancel" HorizontalAlignment="Left" Height="29" Foreground="Black" FontSize="20" VerticalAlignment="Top" Width="80" IsEnabled="{Binding SandCBtnEnable}" Margin="236,391,0,0"/>
+        <Button Command="{Binding ExitCommand}" Content="X" HorizontalAlignment="Left" Height="32" Foreground="Black" FontSize="24" VerticalAlignment="Top" Width="32" Margin="750,7,0,0"/>
+    </Grid>
+</UserControl>
